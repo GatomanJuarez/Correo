@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Correo</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    
+    <script>
+        var posicion = "arriba";
+        //Jquery = $
+        $(function (){
+            //funciones anonimas, se usa cundo se declaran
+            
+              
+
+            
+            $("input, textarea").on("focus", function(){
+               $(this).parents(".form-group").find(".label").hide();
+            }).on("blur",function(){
+                var cajaActual = $(this);
+                revisaLaCajaPorFavor(cajaActual); 
+            });
+            
+            $("img").on("click", function(){
+                if (posicion == "arriba"){
+                    $("#mail-container").animate({"top": "0px"},{duration: 2000, 
+                                                                 easing: "easeOutElastic"});
+                    $("#modal").fadeIn();
+                    posicion = "abajo";
+                }
+                else {
+                    $("#mail-container").animate({"top": "-360px"},{duration: 2000, 
+                                                                   easing: "easeOutBounce"});
+                    $("#modal").fadeOut();
+                    posicion = "arriba";
+                }
+            });
+        });
+        
+        function revisaLaCajaPorFavor($caja){
+           if($caja.val().length == 0){
+                // $caja.css("background-color", "yellow");
+               //Parents primero en la jerarquia
+               //Parent el padre
+                $caja.parents(".form-group").find(".label").show();
+                } 
+        }
+    </script>
+    </head>
+<body>                 <!--columnas, tamaño de la pantalla, espacios-->
+    <h2>Tengo que decir algo con respecto a los alumnos de 4B</h2>
+    <h4>Los alumnos de cuarto cuatrimestre, del grupo B, de la carrera de 
+           ingeniería en software, de la universidad politécnia de Durango, no
+           estudiaron para su examen de programación web porque se quedaron
+           viendo dragon ball super</h4>
+    <section id="modal"></section>
+    <section class="col-md-4 col-sm-12 col-xs-12" id="mail-container">
+        <div class="form-group">
+            <label>Nombre</label>
+             <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-user"></i>
+                </span>
+            <input type="text" id="nombre" name="nombre" class="form-control" />
+        </div>
+                <span class="label label-danger">* El campo es requerido</span>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-envelope"></i>
+                </span>
+            <input type="email" id="email" name="email" class="form-control" />
+        </div>
+            <span class="label label-danger">* El campo es requerido</span>
+            </div>
+        <div class="form-group">
+            <label>Asunto</label> 
+             <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-tags"></i>
+                </span>
+            <input type="text" id="asunto" name="asunto" class="form-control" />
+        </div>
+            <span class="label label-danger">* El campo es requerido</span>
+        </div>
+        <div class="form-group">
+            <label>Texto</label>
+            <textarea id="texto" name="texto" class="form-control"></textarea>
+            <span class="label label-danger">* El campo es requerido</span>
+        </div>
+        <button id="enviar" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>Enviar</button>
+        <img src="email.png" alt="correo" />
+    </section>
+    
+    </body>
+</html>
